@@ -62,6 +62,7 @@ The _Bunny Helpers_ can be sourced which extend the bunny scripting language wit
 The bunny_helpers.sh file from the mass storage payloads/library folder contains a number of functions and variables which may be sourced from any Bash Bunny payload. Over time these functions will grow to enhance the platform with standardizations and simplifications of frequently used tasks. The 1.0 version from Bash Bunny launch, March 1, 2017 include the following variables:
 
 | VARIABLE         | Description                                                                                          |
+|------------------|------------------------------------------------------------------------------------------------------|
 | $TARGET_IP       | IP Address of the victim computer as obtained by the Bash Bunny DHCP server (typically 172.16.64.10) |
 | $TARGET_HOSTNAME | Host name of the victim computer                                                                     |
 | $HOST_IP         | IP Address of the Bash Bunny (default: 172.16.64.1)                                                  |
