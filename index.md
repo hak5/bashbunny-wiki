@@ -48,14 +48,14 @@ Bunny Script is a language consisting of a number of simple commands specific to
 
 The _Bunny Helpers_ can be sourced which extend the bunny scripting language with user contributed functions and variables which enhance and simplify payloads. All Bunny Script commands are written in ALL CAPS. The base Bunny Script commands are:
 
-| COMMAND    | Description                                                       |
-| ---------- | ----------------------------------------------------------------- |
-| ATTACKMODE | Specifies the USB device or combination of devices to emulate.    |
-| LED        | Control the RGB LED. Accepts color and optional blink time in ms. |
-| QUACK      | Injects keystrokes (ducky script) or specified ducky script file. |
-| Q          | Alias for QUACK                                                   |
-| VID        | Specifies the USB Vendor ID (in hex) to spoof                     |
-| PID        | Specifies the USB Product ID (in hex) to spoof                    |
+| COMMAND    | Description                                                           |
+| ---------- | --------------------------------------------------------------------- |
+| ATTACKMODE | Specifies the USB device or combination of devices to emulate.        |
+| LED        | Control the RGB LED. Accepts color and optional blink time in ms.     |
+| QUACK      | Injects keystrokes (ducky script) or specified ducky script file.     |
+| Q          | Alias for QUACK                                                       |
+| VID        | Specifies the USB Vendor ID (in hex) to spoof (ATTACKMODE parameter)  |
+| PID        | Specifies the USB Product ID (in hex) to spoof (ATTACKMODE parameter) |
 
 ### Bunny Helpers
 
@@ -157,7 +157,7 @@ USB devices identify themselves by combinations of vendor ID and product ID. The
 
 **Example**:
 ~~~~
-ATTACKMODE HID STORAGE VID 0XF000 PID 0X1234
+ATTACKMODE HID STORAGE VID_0XF000 PID_0X1234
 ~~~~
 
 ## Payload Best Practices
