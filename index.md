@@ -54,8 +54,6 @@ The _Bunny Helpers_ can be sourced which extend the bunny scripting language wit
 | LED        | Control the RGB LED. Accepts color and optional blink time in ms.     |
 | QUACK      | Injects keystrokes (ducky script) or specified ducky script file.     |
 | Q          | Alias for QUACK                                                       |
-| VID        | Specifies the USB Vendor ID (in hex) to spoof (ATTACKMODE parameter)  |
-| PID        | Specifies the USB Product ID (in hex) to spoof (ATTACKMODE parameter) |
 
 ### Bunny Helpers
 
