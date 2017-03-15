@@ -232,7 +232,7 @@ Open PuTTY and select Serial. Enter COM# for serial line and 115200 for Speed. C
 ```
 ls /dev/tty*" or "dmesg | grep tty
 ```
-> Usually on a Linux host, the Bash Bunny will register as either /dev/ttyUSB0 or /dev/ttyACM0
+> Usually on a Linux host, the Bash Bunny will register as either /dev/ttyUSB0 or /dev/ttyACM0.  On an OSX/macOS host, the Bash Bunny will register as /dev/tty.usbmodemch000001.
 
 2. Next, connect to the serial device using screen, minicom or your terminal emulator of choice. 
 > If screen is not installed it can usually be found from your distributions package manager.
