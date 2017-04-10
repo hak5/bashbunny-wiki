@@ -22,7 +22,7 @@ The first time the Bash Bunny is upgraded it will indicate the flashing process 
 
 **NOTE**: Following version 1.0, all future upgrades and firmware recoveries will be indicated by a special LED "police" pattern, alternating quickly between red and blue.
 
-## Step by Step
+## Step by Step Firmware Upgrade Instructions
 
 1. Download the latest version of the Bash Bunny firmware from [https://bashbunny.com/downloads](https://bashbunny.com/downloads)
 2. Verify that the SHA256 checksum of the downloaded firmware files matches the checksum listed at bashbunny.com
