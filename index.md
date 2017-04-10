@@ -16,7 +16,9 @@ Markdown Syntax: http://daringfireball.net/projects/markdown/syntax
 
 Table Generator: http://www.tablesgenerator.com/markdown_tables
 
+## Where to get payloads
 
+TK TK TK
 
 ## Switch Positions
 
@@ -48,9 +50,30 @@ In Switch Position 3 (closest to the USB plug) the Bash Bunny will boot into _ar
 | Red (blinking)       | Recovery Mode **DO NOT UNPLUG**                   |
 | Red/Blue Alternating | Recovery Mode from v1.1 onwards **DO NOT UNPLUG** |
 
+### Tools
+
+While many tools can be installed to the Bash Bunny as you would any typical Debian based Linux computer, such as *apt-get*, *git clone*, a dedicated tools folder from the mass storage partition simplifies the process. Accessible from arming mode, tools in either .deb format or entire directories can be easily copied to /tools on the root of the mass storage partition. Then on the next boot of the Bash Bunny in Arming mode, these tools will be installed - indicated by LED SETUP (Solid Magenta light). 
+
+On boot into arming mode, any .deb file placed in the tools folder will be installed with dpkg. Then any remaining file or directory will be moved to /tools on the root file system.
+
+Some payloads may require additional third party tools. For example, the rdp_checker payload requires impacket to be located in /tools/impacket. This can be installed by copying either the impacket directory or an impacket.deb file to the /tools directory and booting into arming mode. The rdp_checker payload also makes use of the **REQUIRETOOL** Bunny Script extension, which checks for the existence of this tool and exits with a red blinking FAIL LED state if the tool is not found.
+
+
+### Languages
+
+Bash Bunny payloads can execute keystroke injection attacks similar to the USB Rubber Ducky by using the HID ATTACKMODE. By default this mode uses a US keyboard layout. Additional keyboard layouts may be developed by the community. Installing additional keyboard layouts is similar to use of the tools folder on the root of the USB mass storage partition. On bootup into arming mode, any two-letter-country-code.json file located in the /languages folder on the root of the USB mass storage partition will be installed. The file will remain in /languages after installation.
+
+With a new language file installed, one may specify the keyboard layout from a payload by using the **DUCKY_LANG** extension. This extension accepts a two letter country code. 
+
+**Example:**
+```
+DUCKY_LANG us
+```
+
+
 ---
 
-# Bash Bunny Payloads
+# Bash Bunny Payload Development
 
 Bash Bunny payloads can be written in any standard text editor, such as notepad, vi or nano. 
 
@@ -93,6 +116,9 @@ This table is provides a non-exhaustive list of basic usage for some extensions.
 | DUCKY_LANG       | Accepts two letter country code to set the HID injection language for subsequent ducky script / QUACK commands | DUCKY_LANG us |
 
 **NOTE**: Extensions replaced bunny_helpers.sh from [Bash Bunny firmware version 1.1}(https://www.bashbunny.com/downloads/) onwards.
+
+
+
 
 ### ATTACKMODE
 
@@ -168,26 +194,26 @@ The multi-color RGB LED status indicator on the Bash Bunny may be set using the 
 
 These standardized LED States may be used to indicate common payload status. The basic LED states include **SETUP**, **FAIL**, **ATTACK**, **CLEANUP** and **FINISH**. Payload developers are encouraged to use these common payload states. Additional states including multi-staged attack patterns are shown in the table below.
 
-| STATE    | COLOR PATTERN | Description                 |
-| -------- | ------------- | --------------------------- |
-| SETUP    | M SOLID       | Magenta solid |
-| FAIL     | R SLOW        | Red slow blink |
-| FAIL1    | R SLOW        | Red slow blink |
-| FAIL2    | R FAST        | Red fast blink |
-|	FAIL3    | R VERYFAST    | Red very fast blink |
-| ATTACK   | Y SINGLE      | Yellow single blink |
-| STAGE1   | Y SINGLE      | Yellow single blink |
-| STAGE2   | Y DOUBLE      | Yellow double blink |
-| STAGE3   | Y TRIPLE      | Yellow triple blink |
-| STAGE4   | Y QUAD        | Yellow quadruple blink |
-| STAGE5   | Y QUIN        | Yellow quintuple blink |
-| SPECIAL  | C ISINGLE     | Cyan inverted single blink |
-| SPECIAL1 | C ISINGLE     | Cyan inverted single blink |
-| SPECIAL2 | C IDOUBLE     | Cyan inverted double blink |
-| SPECIAL3 | C ITRIPLE     | Cyan inverted triple blink |
-| SPECIAL4 | C IQUAD       | Cyan inverted quadriple blink |
-| SPECIAL5 | C IQUIN       | Cyan inverted quintuple blink |
-| CLEANUP  | W FAST        | White fast blink |
+| STATE    | COLOR PATTERN | Description                                   |
+| -------- | ------------- | --------------------------------------------- |
+| SETUP    | M SOLID       | Magenta solid                                 |
+| FAIL     | R SLOW        | Red slow blink                                |
+| FAIL1    | R SLOW        | Red slow blink                                |
+| FAIL2    | R FAST        | Red fast blink                                |
+|	FAIL3    | R VERYFAST    | Red very fast blink                           |
+| ATTACK   | Y SINGLE      | Yellow single blink                           |
+| STAGE1   | Y SINGLE      | Yellow single blink                           |
+| STAGE2   | Y DOUBLE      | Yellow double blink                           |
+| STAGE3   | Y TRIPLE      | Yellow triple blink                           |
+| STAGE4   | Y QUAD        | Yellow quadruple blink                        |
+| STAGE5   | Y QUIN        | Yellow quintuple blink                        |
+| SPECIAL  | C ISINGLE     | Cyan inverted single blink                    |
+| SPECIAL1 | C ISINGLE     | Cyan inverted single blink                    |
+| SPECIAL2 | C IDOUBLE     | Cyan inverted double blink                    |
+| SPECIAL3 | C ITRIPLE     | Cyan inverted triple blink                    |
+| SPECIAL4 | C IQUAD       | Cyan inverted quadriple blink                 |
+| SPECIAL5 | C IQUIN       | Cyan inverted quintuple blink                 |
+| CLEANUP  | W FAST        | White fast blink                              |
 | FINISH   | G SUCCESS     | Green 1000ms VERYFAST blink followed by SOLID |
 
 #### Examples
