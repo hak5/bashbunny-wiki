@@ -1,5 +1,11 @@
 # Downloads
 
+## Where to get payloads
+
+Many payloads are hosted from the centralized library on the Hak5 git repository at [github.com/hak5/bashbunny-payloads](https://github.com/hak5/bashbunny-payloads). Payloads from this repository are contributed from the Bash Bunny community. As with any script downloaded from the Internet, you are advised to proceed with caution. Similarly, many community developed tools exist for working with the Bash Bunny, such as [BunnyToolkit.com](https://bunnytoolkit.com/).
+
+**WARNING:** Community payloads come with absolutely no warranty. You are solely responsible for the outcome of their execution.
+
 ## Bash Bunny Firmware Upgrades
 
 | Version | Changelog | Forum | SHA256 |
