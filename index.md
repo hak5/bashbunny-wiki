@@ -2,6 +2,22 @@
 
 The Bash Bunny by Hak5 is the world’s most advanced USB attack platform. It delivers penetration testing attacks and IT automation tasks in seconds by emulating combinations of trusted USB devices – like gigabit Ethernet, serial, flash storage and keyboards. With it, computers are tricked into divulging data, exfiltrating documents, installing backdoors and many more exploits.
 
+## Contributing to the Wiki
+
+### Thank You
+The Bash Bunny Wiki is brought to you by Hak5 and many other community members. As a community driven resource, the people who use and edit the wiki would be very grateful if you followed the guidelines below. 
+
+All changes to the wiki can be contributed on [GitHub](https://github.com/hak5/bashbunny-wiki)
+
+### Markdown
+Markdown Basics: https://help.github.com/articles/markdown-basics/
+
+Markdown Syntax: http://daringfireball.net/projects/markdown/syntax
+
+Table Generator: http://www.tablesgenerator.com/markdown_tables
+
+
+
 ## Switch Positions
 
 In Switch Position 3 (closest to the USB plug) the Bash Bunny will boot into _arming mode_, enabling both Serial and Mass Stoage. From this dedicated mode, Bash Bunny payloads may be managed via Mass Storage and the Linux shell can be accessed by the Serial console.
@@ -25,12 +41,12 @@ In Switch Position 3 (closest to the USB plug) the Bash Bunny will boot into _ar
 
 ### LED Status
 
-| LED              | Status                                |
-| ---------------- | ------------------------------------- |
-| Green (blinking) | Booting up                            |
-| Blue (blinking)  | Arming Mode                           |
-| Red (blinking)   | Recovery Mode **DO NOT UNPLUG**       |
-
+| LED                  | Status                                            |
+| -------------------- | ------------------------------------------------- |
+| Green (blinking)     | Booting up                                        |
+| Blue (blinking)      | Arming Mode                                       |
+| Red (blinking)       | Recovery Mode **DO NOT UNPLUG**                   |
+| Red/Blue Alternating | Recovery Mode from v1.1 onwards **DO NOT UNPLUG** |
 
 ---
 
@@ -51,26 +67,32 @@ The _Bunny Helpers_ can be sourced which extend the bunny scripting language wit
 | COMMAND    | Description                                                           |
 | ---------- | --------------------------------------------------------------------- |
 | ATTACKMODE | Specifies the USB device or combination of devices to emulate.        |
-| LED        | Control the RGB LED. Accepts color and optional blink time in ms.     |
+| LED        | Control the RGB LED. Accepts color and pattern or payload state.      |
 | QUACK      | Injects keystrokes (ducky script) or specified ducky script file.     |
 | Q          | Alias for QUACK                                                       |
+| DUCKY_LANG | Set the HID Kayboard language. *e.g: DUCKY_LANG us*                   |
 
-### Bunny Helpers
+### Extensions
 
-The bunny_helpers.sh file from the mass storage payloads/library folder contains a number of functions and variables which may be sourced from any Bash Bunny payload. Over time these functions will grow to enhance the platform with standardizations and simplifications of frequently used tasks. The 1.0 version from Bash Bunny launch, March 1, 2017 include the following variables:
+Extensions which augment the bunny scripting language with new commands and functions. For each payload.txt run, extensions are sourced automatically. Calling the function names of any extension will produce the desired result. Extensions reside in the payload library on the USB mass storage partition from /payloads/library/extensions.
 
-| VARIABLE         | Description                                                                                          |
-|------------------|------------------------------------------------------------------------------------------------------|
-| $TARGET_IP       | IP Address of the victim computer as obtained by the Bash Bunny DHCP server (typically 172.16.64.10) |
-| $TARGET_HOSTNAME | Host name of the victim computer                                                                     |
-| $HOST_IP         | IP Address of the Bash Bunny (default: 172.16.64.1)                                                  |
+#### Example Extensions
 
-These variables and functions may be used in any Bash Bunny script (payload.txt) using the following command:
-~~~~
-source bunny_helpers.sh
-~~~~
+This table is provides a non-exhaustive list of basic usage for some extensions. Additional extension documentation can be found from the comments within each individual extension script file in /payload/library/extensions.
 
-Developers are encouraged to add to the helpers file in order to extend Bash Bunny functionality.
+| COMMAND          | Description                                                  | Example                                        |
+| ---------------- | ------------------------------------------------------------ | ---------------------------------------------- |
+| RUN              | Keystroke injection shortcut for mutli-OS command execution. | RUN WIN notepad.exe                            |
+|                  |                                                              | RUN OSX terminal                               |
+|                  |                                                              | RUN UNITY xterm                                |
+| GET              | Exports system variables                                     | GET TARGET_IP # exports $TARGET_IP             |
+|                  |                                                              | GET TARGET_HOSTNAME # exports $TARGET_HOSTNAME |
+|                  |                                                              | GET HOST_IP # exports $HOST_IP                 |
+|                  |                                                              | GET SWITCH_POSITION # exports $SWITCH_POSITION |
+| REQUIRETOOL      | Exits payload with LED FAIL state if the specified tool is not found in /tools | REQUIRETOOL impacket         |
+| DUCKY_LANG       | Accepts two letter country code to set the HID injection language for subsequent ducky script / QUACK commands | DUCKY_LANG us |
+
+**NOTE**: Extensions replaced bunny_helpers.sh from [Bash Bunny firmware version 1.1}(https://www.bashbunny.com/downloads/) onwards.
 
 ### ATTACKMODE
 
@@ -107,24 +129,78 @@ Many combinations of attack modes are possible, however some are not. For exmapl
 
 ### LED
 
-The multi-color RGB LED status indicator on the Bash Bunny may be set using the LED command. It accepts combinations of R (red), G (green) and B (blue) and optionally a blink time (in ms). 
+The multi-color RGB LED status indicator on the Bash Bunny may be set using the LED command. It accepts either a combination of color and pattern, or a common payload state. 
 
-**Examples**:
+#### LED Colors
+
+| COMMAND | Description                    | 
+| ------- | ------------------------------ |
+| R       | Red                            |
+| G       | Green                          |
+| B       | Blue                           |
+| Y       | Yellow (AKA as Amber)          |
+| C       | Cyan (AKA Light Blue)          |
+| M       | Magenta (AKA Violet or Purple) |
+| W       | White                          |
+
+#### LED Patterns
+
+| PATTERN    | Description                                              |
+| ---------- | -------------------------------------------------------- |
+| SOLID      | *Default* No blink. Used if pattern argument is ommitted |
+| SLOW       | Symmetric 1000ms ON, 1000ms OFF, repeating               |
+| FAST       | Symmetric 100ms ON, 100ms OFF, repeating                 |
+| VERYFAST   | Symmetric 10ms ON, 10ms OFF, repeating                   |
+| SINGLE     | 1 100ms blink(s) ON followed by 1 second OFF, repeating  |
+| DOUBLE     | 2 100ms blink(s) ON followed by 1 second OFF, repeating  |
+| TRIPLE     | 3 100ms blink(s) ON followed by 1 second OFF, repeating  |
+| QUAD       | 4 100ms blink(s) ON followed by 1 second OFF, repeating  |
+| QUIN       | 5 100ms blink(s) ON followed by 1 second OFF, repeating  |
+| ISINGLE    | 1 100ms blink(s) OFF followed by 1 second ON, repeating  |
+| IDOUBLE    | 2 100ms blink(s) OFF followed by 1 second ON, repeating  |
+| ITRIPLE    | 3 100ms blink(s) OFF followed by 1 second ON, repeating  |
+| IQUAD      | 4 100ms blink(s) OFF followed by 1 second ON, repeating  |
+| IQUIN      | 5 100ms blink(s) OFF followed by 1 second ON, repeating  |
+| SUCCESS    | 1000ms VERYFAST blink followed by SOLID                  |
+| 1-10000    | Custom value in ms for continuous symmetric blinking     |
+
+#### LED State
+
+These standardized LED States may be used to indicate common payload status. The basic LED states include **SETUP**, **FAIL**, **ATTACK**, **CLEANUP** and **FINISH**. Payload developers are encouraged to use these common payload states. Additional states including multi-staged attack patterns are shown in the table below.
+
+| STATE    | COLOR PATTERN | Description                 |
+| -------- | ------------- | --------------------------- |
+| SETUP    | M SOLID       | Magenta solid |
+| FAIL     | R SLOW        | Red slow blink |
+| FAIL1    | R SLOW        | Red slow blink |
+| FAIL2    | R FAST        | Red fast blink |
+|	FAIL3    | R VERYFAST    | Red very fast blink |
+| ATTACK   | Y SINGLE      | Yellow single blink |
+| STAGE1   | Y SINGLE      | Yellow single blink |
+| STAGE2   | Y DOUBLE      | Yellow double blink |
+| STAGE3   | Y TRIPLE      | Yellow triple blink |
+| STAGE4   | Y QUAD        | Yellow quadruple blink |
+| STAGE5   | Y QUIN        | Yellow quintuple blink |
+| SPECIAL  | C ISINGLE     | Cyan inverted single blink |
+| SPECIAL1 | C ISINGLE     | Cyan inverted single blink |
+| SPECIAL2 | C IDOUBLE     | Cyan inverted double blink |
+| SPECIAL3 | C ITRIPLE     | Cyan inverted triple blink |
+| SPECIAL4 | C IQUAD       | Cyan inverted quadriple blink |
+| SPECIAL5 | C IQUIN       | Cyan inverted quintuple blink |
+| CLEANUP  | W FAST        | White fast blink |
+| FINISH   | G SUCCESS     | Green 1000ms VERYFAST blink followed by SOLID |
+
+#### Examples
 
 ```
-LED R 1000
+LED Y SINGLE
 ```
-Set the LED to blink red at 1 second interval
-
 ```
-LED R B 0
+LED M 500
 ```
-Set the LED to solid purple (red + blue)
-
 ```
-LED
+LED SETUP
 ```
-Turn off the LED
 
 
 ### QUACK
