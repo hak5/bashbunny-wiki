@@ -30,9 +30,15 @@ In Switch Position 3 (closest to the USB plug) the Bash Bunny will boot into _ar
 
 ![Bash Bunny Directory Diagram](images/bb_diagram2.png)
 
-* The _library_ folder is home to the payloads library which can be downloaded from the [Bash Bunny Payload git repository](https://github.com/hak5/bashbunny-payloads "Bash Bunny Payload git repository")
-* The _switch1_ and _switch2_ folders are home to payload.txt and accompanying files which will be executed on boot when the bash bunny switch is in the corresponding position.
-* The _loot_ folder is used by many payloads to save logs and other captured information.
+* /_docs_ - home to documentation.
+* /_languages_ - install additional HID Keyboard layouts/languages.
+* /_loot_ - used by payloads to store logs and other data
+* /_tools_ - used to install additional deb packages and other tools.
+* /_payloads_ - home to active payloads, library and extensions 
+* /_payloads_/_switch1_ and _/payloads_/_switch2_ - home to payload.txt and accompanying files which will be executed on boot when the bash bunny switch is in the corresponding position.
+* /_payloads_/_library_ - home to the payloads library which can be downloaded from the [Bash Bunny Payload git repository](https://github.com/hak5/bashbunny-payloads "Bash Bunny Payload git repository")
+* /_payloads_/_library_/_extensions_ - home to Bunny Script extensions 
+
 
 ## Default Settings
 
@@ -43,12 +49,12 @@ In Switch Position 3 (closest to the USB plug) the Bash Bunny will boot into _ar
 
 ## LED Status
 
-| LED                  | Status                                            |
-| -------------------- | ------------------------------------------------- |
-| Green (blinking)     | Booting up                                        |
-| Blue (blinking)      | Arming Mode                                       |
-| Red (blinking)       | Recovery Mode **DO NOT UNPLUG**                   |
-| Red/Blue Alternating | Recovery Mode from v1.1 onwards **DO NOT UNPLUG** |
+| LED                  | Status                                                            |
+| -------------------- | ----------------------------------------------------------------- |
+| Green (blinking)     | Booting up                                                        |
+| Blue (blinking)      | Arming Mode                                                       |
+| Red (blinking)       | Recovery Mode or Firmware Flashing *from v1.0* **DO NOT UNPLUG**  |
+| Red/Blue Alternating | Recovery Mode or Firmware Flashing *from v1.1+* **DO NOT UNPLUG** |
 
 ## Tools
 
