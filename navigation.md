@@ -8,4 +8,6 @@
 
 [Forums](https://forums.hak5.org/index.php?/forum/92-bash-bunny/)
 
-[Payloads](https://github.com/hak5/bashbunny-payloads)
+[Payload Development](payload_development.md)
+
+[Get Payloads](https://github.com/hak5/bashbunny-payloads)
