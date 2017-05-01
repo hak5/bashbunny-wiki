@@ -10,6 +10,7 @@ Many payloads are hosted from the centralized library on the Hak5 git repository
 
 | Version | Changelog | Forum | SHA256 |
 | ------- | --------- | ----- | ------ |
+| [Download 1.2](https://storage.googleapis.com/bashbunny_updates/ch_fw_1.2_249.tar.gz) | [Changelog](https://storage.googleapis.com/bashbunny_updates/ch_fw_1.2-changelog.txt) | [Forum Thread](https://forums.hak5.org/index.php?/topic/40902-release-bash-bunny-firmware-v12/) | c77be9d7a6526e9ce6b4b919b9cb7e3f7da48f059261622ab1713d8cc1814e84 |
 | [Download 1.1](https://storage.googleapis.com/bashbunny_updates/ch_fw_1.1_228.tar.gz) | [Changelog](https://storage.googleapis.com/bashbunny_updates/ch_fw_1.1-changelog.txt) | [Forum Thread](https://forums.hak5.org/index.php?/topic/40661-release-bash-bunny-11/) | 3d768f70bdbc4b5209a587189ac71cbf8ad7ee394ede371c040695db95d9dd3b |
 
 ## Installation Overview
