@@ -155,6 +155,29 @@ wget bashbunny.com/bb.sh
 sudo bash ./bb.sh
 ~~~~
 
+## Sharing an Internet Connection with the Bash Bunny from OSX
+1. Configure a payload.txt for ATTACKMODE RNDIS_ETHERNET STORAGE
+2. Boot Bash Bunny from RNDIS_ETHERNET configured payload
+3. Open a terminal on the OSX host. Install Macports if you don't have it installed already. http://macports.org
+4. Install and set up Squid on the OSX host:
+  ~~~
+  sudo port install squid
+  sudo squid -Z
+  sudo squid
+  ~~~
+5. You will now have an open (!!) proxy running on all interfaces of your host. If you are not in a trusted environment, limit the interface in the squid.conf file. 
+6. SSH to the bash bunny
+~~~
+ssh root@172.16.64.1
+~~~
+7. Set up the proxy server using environment variables.
+~~~
+export http_proxy=http://172.16.64.10:3128   <-- change the IP address to match the host IP if needed
+~~~
+8. Your bash bunny should now be on-line. 
+~~~
+apt-get update; apt-get upgrade 
+~~~
 ---
 
 # Technical Details
