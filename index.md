@@ -191,9 +191,13 @@ apt-get update; apt-get upgrade
 | /dev/nandf | Mass storage partition (mounted at /root/udisk) |
 
 ## Firmware Recovery
-If the Bash Bunny fails to boot more than 3 times, it will automatically enter recovery mode. The LED will blink red while the file system is replaced by the backup partition. **DO NOT UNPLUG THE BASH BUNNY DURING RECOVERY**
+1. Set the Bash Bunny switch to position 3 (arming mode)
+2. Plug the Bash Bunny into a USB power source. The LED will momentarily light green. As soon as the LED goes off, unplug the Bash Bunny.
+3. Repeat the previous step twice more (for a total of 3 times)
+4. Plug the Bash Bunny into a USB power source and leave for 4 minutes. The LED will light RED to indicate recovery. When the light returns to BLUE blinking, the Bash Bunny has recovered.
 
-This process takes about 3 minutes. When complete, the Bash Bunny will reboot as indicated by the blinking green LED.
+**DO NOT UNPLUG THE BASH BUNNY DURING RECOVERY**
+
 
 ## Specifications
 * Quad-core ARM Cortex A7
