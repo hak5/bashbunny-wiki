@@ -191,7 +191,6 @@ apt-get update; apt-get upgrade
 | /dev/nandf | Mass storage partition (mounted at /root/udisk) |
 
 ## Firmware Recovery
-
 1. Set the Bash Bunny switch to position 3 (arming mode)
 2. Plug the Bash Bunny into a USB power source. The LED will momentarily light green. As soon as the LED goes off, unplug the Bash Bunny.
 3. Repeat the previous step twice more (for a total of 3 times)
