@@ -20,7 +20,8 @@ Your Bash Bunny can be easily upgraded to the latest firmware version. Just copy
 
 The first time the Bash Bunny is upgraded it will indicate the flashing process with a red blinking LED for up to 10 minutes. The flashing process will be followed by a green LED to indicate that the Bash Bunny is rebooting. Finally the standard slow blinking blue LED will indicate that the flashing process has succeeded and arming mode is ready.
 
-**WARNING**: Do not unplug the Bash Bunny while firmware upgrade is in progress. Doing so will spell certain doom.
+**WARNING**: Do **not** unplug the Bash Bunny while firmware upgrade is in progress. Doing so will spell certain doom.
+**WARNING**: Do **not** extract the contents of the downloaded `.tar.gz` to the Bash Bunny or change the name of the downloaded `.tar.gz` file. Doing so will put your Bash Bunny into a boot loop on firmwares 1.0 to 1.3.
 
 **NOTE**: Following version 1.0, all future upgrades and firmware recoveries will be indicated by a special LED "police" pattern, alternating quickly between red and blue.
 
