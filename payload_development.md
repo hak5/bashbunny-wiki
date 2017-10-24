@@ -57,6 +57,7 @@ ATTACKMODE is a bunny script command which specifies which devices to emulate. T
 | RNDIS_ETHERNET     | RNDIS - Remote Network Drv Int Spec    | Windows (and some Linux) Ethernet Adapter                  |
 | STORAGE            | UMS - USB Mass Storage                 | Flash Drive                                                |
 | HID                | HID - Human Interface Device           | Keyboard - Keystroke Injection via Ducky Script            |
+| OFF                | NONE                                   | Disables the USB interface until ATTACKMODE is executed    |
 
 Many combinations of attack modes are possible, however some are not. For exmaple, ATTACKMODE HID STORAGE ECM_ETHERNET is valid while ATTACKMODE RNDIS_ETHERNET ECM_ETHERNET STORAGE SERIAL is not. Each attack mode combination registers using a different USB VID/PID (Vendor ID/Product ID) by default. VID and PID can be spoofed using the VID and PID commands.
 
