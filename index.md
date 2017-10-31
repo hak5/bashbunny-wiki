@@ -145,7 +145,7 @@ Getting the Bash Bunny online can be convenient for a number of reasons, such as
 
 ## Sharing an Internet Connection with the Bash Bunny from Linux
 
-1. Download the Internet Connection Sharing script from bashbunny.com/bb.sh
+1. From your Linux computer download the Internet Connection Sharing script from bashbunny.com/bb.sh
 2. Run the bb.sh connection script with bash as root
 3. Follow the [M]anual or [G]uided setup to configure iptables and routing
 4. Save settings for future sessions and [C]onnect
