@@ -19,7 +19,7 @@ The _Bunny Helpers_ can be sourced which extend the bunny scripting language wit
 | LED        | Control the RGB LED. Accepts color and pattern or payload state.      |
 | QUACK      | Injects keystrokes (ducky script) or specified ducky script file.     |
 | Q          | Alias for QUACK                                                       |
-| DUCKY_LANG | Set the HID Kayboard language. *e.g: DUCKY_LANG us*                   |
+| DUCKY_LANG | Set the HID Keyboard language. *e.g: DUCKY_LANG us*                   |
 
 ## Extensions
 
