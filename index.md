@@ -178,6 +178,11 @@ export http_proxy=http://172.16.64.10:3128   <-- change the IP address to match 
 ~~~
 apt-get update; apt-get upgrade 
 ~~~
+9. To stop Squid on the OSX host:
+~~~
+sudo port unload squid
+~~~
+10. Restart OSX host.
 ---
 
 # Technical Details
