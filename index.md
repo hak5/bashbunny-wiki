@@ -156,8 +156,8 @@ sudo bash ./bb.sh
 ~~~~
 
 ## Sharing an Internet Connection with the Bash Bunny from OSX
-1. Configure a payload.txt for ATTACKMODE RNDIS_ETHERNET STORAGE
-2. Boot Bash Bunny from RNDIS_ETHERNET configured payload
+1. Configure a payload.txt for ATTACKMODE ECM_ETHERNET STORAGE
+2. Boot Bash Bunny from ECM_ETHERNET configured payload
 3. Open a terminal on the OSX host. Install Macports if you don't have it installed already. http://macports.org
 4. Install and set up Squid on the OSX host:
   ~~~
