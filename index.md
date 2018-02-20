@@ -162,7 +162,7 @@ sudo bash ./bb.sh
 4. Install and set up Squid on the OSX host:
   ~~~
   sudo port install squid
-  sudo squid -Z
+  sudo squid -z
   sudo squid
   ~~~
 5. You will now have an open (!!) proxy running on all interfaces of your host. If you are not in a trusted environment, limit the interface in the squid.conf file. 
